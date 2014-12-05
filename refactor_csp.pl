@@ -27,7 +27,7 @@ sub main {
 sub refactor_csp {
   opendir my $dh, $dir or die "$dir:$!";
   # 外部スクリプ名の規則は html.num.js
-  my $num = 0;
+  my $num = -1;
 
   while (my $file = readdir $dh) {
     next if $file =~ /^\.{1,2}$/;
