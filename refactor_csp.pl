@@ -3,8 +3,8 @@
 #
 # refactor_csp.pl
 #
-# Refactor for CSP v1
-# 実行ディレクトリ内のHTMLファイル全てに対して、
+# Refactor for CSP v2
+# 実行時引数のディレクトリ内の全てのHTMLファイルに対して、
 # HTMLソース内部のタグ<script>を外部jsファイル読み込み形式に変更する 
 # 生成されるファイルの命名規則は Chrome Dev Editor に従い、以下のようにした
 # 
@@ -19,6 +19,12 @@ use utf8;
 use File::Copy;
 
 my $dir = '.'; # 対象ディレクトリ
+if(scalar @ARGV == 1) {
+    $dir = $ARGV[0];
+}
+chdir $dir; # ディレクトリを移動する
+
+$dir = '.';
 
 sub main {
   refactor_csp();
@@ -27,7 +33,7 @@ sub main {
 sub refactor_csp {
   opendir my $dh, $dir or die "$dir:$!";
   # 外部スクリプ名の規則は html.num.js
-  my $num = 0;
+  my $num = -1;
 
   while (my $file = readdir $dh) {
     next if $file =~ /^\.{1,2}$/;
@@ -124,7 +130,7 @@ sub refactor_csp {
     }
 
     # 1つぶんのファイルの処理が完了
-    $num = 0;
+    $num = -1;
   }
   closedir $dh;
 }
