@@ -1,22 +1,42 @@
 # -*- coding: utf-8 -*-
 
-import os.path
+import os
+#import os.path
 import shutil
 import glob
 import urllib
 from bs4 import BeautifulSoup
 
-# ビール
+# ビールの絵文字
 created_marc = "🍺"
-# 寿司
+# 寿司の絵文字
 completed_marc = "🍣"
 
 def main():
-    pass
+    current_dir = os.getcwd()
+    target_htmls = []
+    for f in get_all_html_files(current_dir):
+        if(f.split(".")[-1] == "html"):
+            target_htmls.append(f)
 
-def refactor_csp_main():
+    for target in target_htmls:
+        refactor_csp_main(target)
+
+    print completed_marc
+
+def get_all_html_files(cwd):
+    for root, dirs, files in os.walk(cwd):
+        if '.git' in dirs:
+            dirs.remove('.git')
+        if '.cvs' in dirs:
+            dirs.remove('.cvs')
+        yield root
+        for file in files:
+            yield os.path.join(root, file)
+
+def refactor_csp_main(target_file):
     # 対象のHTMLファイル名を格納
-    htmlfile = "sample.html"
+    htmlfile = target_file
     html = open(htmlfile, "rw")
     soup = BeautifulSoup(html)
     # 対応すべきスクリプトタグのリストを取得する
@@ -30,7 +50,6 @@ def refactor_csp_main():
         editHtmlScriptTag(generated_js_names, scripts, soup, htmlfile)
     # HTMLを閉じる
     html.close()
-    print completed_marc
 
 def getEmbedScriptTags(soup):
     '''
@@ -81,8 +100,10 @@ def createScriptFiles(scripts, filename):
         f = open(js_name, "w")
         f.write(script.string.encode('utf8'))
         f.close()
-        created_js_name.append(js_name)
         print "{}  {}".format(created_marc, js_name)
+        # ファイル名を整形する
+        js_name = js_name.split("/")[-1]
+        created_js_name.append(js_name)
         nextN += 1
     return created_js_name
 
