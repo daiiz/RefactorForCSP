@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os
-#import os.path
 import shutil
 import glob
 import urllib
@@ -71,8 +70,6 @@ def createHtmlCopy(filename):
     命名規則： index.html.pre_csp
     '''
     copyfile = "{}.pre_csp".format(filename)
-    #has_copy = os.path.exists(copyfile)
-    #if(has_copy is False):
     shutil.copy(filename, copyfile)
     print "{}  {}".format(created_marc, copyfile)
     return 1
