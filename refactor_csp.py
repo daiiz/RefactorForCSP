@@ -20,7 +20,7 @@ def main():
     for target in target_htmls:
         refactor_csp_main(target)
 
-    print completed_marc
+    print(completed_marc)
 
 def get_all_html_files(cwd):
     for root, dirs, files in os.walk(cwd):
@@ -70,7 +70,7 @@ def createHtmlCopy(filename):
     '''
     copyfile = "{}.pre_csp".format(filename)
     shutil.copy(filename, copyfile)
-    print u"{}  {}".format(created_marc, copyfile)
+    print(u"{}  {}".format(created_marc, copyfile))
     return 1
 
 def createScriptFiles(scripts, filename):
@@ -96,7 +96,7 @@ def createScriptFiles(scripts, filename):
         f = open(js_name, "w")
         f.write(script.string.encode('utf8'))
         f.close()
-        print u"{}  {}".format(created_marc, js_name)
+        print(u"{}  {}".format(created_marc, js_name))
         # ファイル名を整形する
         js_name = js_name.split("/")[-1]
         created_js_name.append(js_name)
@@ -113,7 +113,7 @@ def editHtmlScriptTag(generated_jss, scripts_soup, soup, filename):
     # HTMLファイルを上書きする
     f = open(filename, "w")
     f.write((soup.prettify()).encode('utf8'))
-    print u"{}  {}".format(created_marc, filename)
+    print(u"{}  {}".format(created_marc, filename))
     f.close()
     return scripts_soup
 
