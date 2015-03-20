@@ -1,7 +1,7 @@
 RefactorForCSP
 ==============
 
-![](https://drive.google.com/file/d/0B5grJAJOVfZmWFRvenVpMVdWUms/view?usp=sharing)
+![](https://lh5.googleusercontent.com/ilgP25cM5liQtEVhS_yrFuWH5YAqPGewiFBus0vLM_HQj57sdOJEASK6FWzWSc5FqDAUGEU2gBQCijA=w1197-h605)
 
 HTMLソース内部のscriptタグを外部JSファイル読み込み形式に変更するスクリプト
 
