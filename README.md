@@ -1,7 +1,14 @@
 RefactorForCSP
 ==============
 
+![](https://drive.google.com/file/d/0B5grJAJOVfZmWFRvenVpMVdWUms/view?usp=sharing)
+
 HTMLソース内部のscriptタグを外部JSファイル読み込み形式に変更するスクリプト
+
+```
+$ cd workspace/
+$ python refactor_csp.py
+```
 
 ```
 #
